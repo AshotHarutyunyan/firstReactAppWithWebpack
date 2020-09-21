@@ -1,3 +1,1 @@
-# Webpack. Полный курс 2020
-
-https://www.youtube.com/watch?v=eSaF8NXeNsA 
+creating react app with web pack
