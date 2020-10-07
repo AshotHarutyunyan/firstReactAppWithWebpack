@@ -8,7 +8,11 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
-    "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
+    "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json",
+    "test": "jest --watch"
+  },
+  "jest": {
+    "verbose": true
   },
   "browserslist": "> 0.25%, not dead",
   "keywords": [
@@ -24,7 +28,9 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
+    "@testing-library/react": "^11.0.4",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^26.3.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
@@ -35,8 +41,10 @@
     "eslint-plugin-react": "^7.20.6",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^26.4.2",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "react-test-renderer": "^16.13.1",
     "style-loader": "^1.1.2",
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.41.5",

@@ -2,14 +2,11 @@ import React from 'react';
 import { css, injectGlobal } from 'emotion';
 import { connect } from 'react-redux';
 import { AddPostForm } from './AddPostForm/AddPostForm';
-import {
-    addNewPost,
-    deletePost,
-    addComment,
-    deleteComment,
-} from '../Redux/actions/actioncreators';
+import { addNewPost, deletePost, setModalData } from '../Redux/actions/actioncreators';
+import { addComment, deleteComment } from '../Redux/reducers/postsReducer'
 import PropTypes from 'prop-types';
 import Posts from './Posts/Posts';
+import Modal from './Comments/Modal';
 
 const component_styles = css`
     max-width: 800px;
@@ -34,30 +31,38 @@ injectGlobal`
     }
 `
 
-const App = ({ addNewPost, posts, deletePost, addComment, deleteComment }) => {
+const App = ({ addNewPost, posts, deletePost, addComment, deleteComment, modaldata, setModalData }) => {
     return (
         <div className={component_styles}>
             <AddPostForm addNewPost={addNewPost} />
             <Posts
                 posts={posts}
                 deletePost={deletePost}
-                addComment={addComment}
-                deleteComment={deleteComment}
+                setModalData={setModalData}
             />
+            {modaldata.length !== 0 &&
+                <Modal
+                    data={modaldata[0]}
+                    setModalData={setModalData}
+                    addComment={addComment}
+                    deleteComment={deleteComment}
+                />
+            }
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
     posts: state.posts.posts,
-    showComments: state.posts.showComments
+    modaldata: state.posts.modaldata
 });
 
 const mapDispatchToProps = {
     addNewPost,
     deletePost,
     addComment,
-    deleteComment
+    deleteComment,
+    setModalData
 };
 
 App.propTypes = {
@@ -65,7 +70,9 @@ App.propTypes = {
     deletePost: PropTypes.func.isRequired,
     addComment: PropTypes.func.isRequired,
     deleteComment: PropTypes.func.isRequired,
+    setModalData: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
+    modaldata: PropTypes.object.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

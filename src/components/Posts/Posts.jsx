@@ -1,17 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Post } from './Post';
-import { nanoid } from 'nanoid';
 
-const Posts = ({ posts, deletePost, addComment, deleteComment }) => {
+const Posts = ({ posts, deletePost, setModalData }) => {
     let items = posts.map(item => {
-        let key = nanoid()
         return <Post
-            key={key}
+            key={item.id}
             {...item}
             deletePost={deletePost}
-            addComment={addComment}
-            deleteComment={deleteComment}
+            setModalData={setModalData}
         />
     });
 
@@ -25,8 +22,7 @@ const Posts = ({ posts, deletePost, addComment, deleteComment }) => {
 Posts.propTypes = {
     posts: PropTypes.array.isRequired,
     deletePost: PropTypes.func.isRequired,
-    addComment: PropTypes.func.isRequired,
-    deleteComment: PropTypes.func.isRequired,
+    setModalData: PropTypes.func.isRequired,
 }
 
 export default Posts

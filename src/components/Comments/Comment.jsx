@@ -2,14 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'emotion';
 
+const styles = css`
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid;
+    padding: 0.5rem;
+    border-radius: 15px;
+`
+
 const Comment = ({ comment, deleteComment, id }) => {
-    const styles = css`
-        display: flex;
-        justify-content: space-between;
-        border: 1px solid;
-        padding: 0.5rem;
-        border-radius: 15px;
-    `
 
     const delComment = () => {
         deleteComment(id[0], id[1])

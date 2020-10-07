@@ -1,7 +1,9 @@
-import { ADD_COMMENT, ADD_POST, DELETE_COMMENT, DELETE_POST } from "../actions/actiontypes";
+import { addCommentAc, deleteCommentAc, setModalData } from "../actions/actioncreators";
+import { ADD_COMMENT, ADD_POST, DELETE_COMMENT, DELETE_POST, SET_MODAL_DATA } from "../actions/actiontypes";
 
 let initialState = {
     posts: [],
+    modaldata: [],
 };
 
 export const posts = (state = initialState, action) => {
@@ -42,9 +44,24 @@ export const posts = (state = initialState, action) => {
                     return item
                 })
             }
+        case SET_MODAL_DATA:
+            return {
+                ...state,
+                modaldata: [...state.posts.filter(item => action.id === item.id)]
+            }
         default:
             return state;
     }
+};
+
+export const addComment = (id, comment) => (dispatch) => {
+    dispatch(addCommentAc(id, comment));
+    dispatch(setModalData(id));
+};
+
+export const deleteComment = (id, comment) => (dispatch) => {
+    dispatch(deleteCommentAc(id, comment));
+    dispatch(setModalData(id));
 };
 
 

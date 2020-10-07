@@ -2,14 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
-const PostBtns = ({ setShowComments }) => {
-    const [liked, setliked] = useState(false);
-
-    const onLikeClick = () => {
-        setliked(!liked)
-    };
-
-    const ButtonsStyled = styled('div')`
+const ButtonsStyled = styled('div')`
         button{
             background: none;
             padding: 0.3rem;
@@ -25,19 +18,34 @@ const PostBtns = ({ setShowComments }) => {
         }
     `
 
+const PostBtns = React.memo(({ setModalData, id }) => {
+    const [liked, setliked] = useState(false);
+
+    const onLikeClick = () => {
+        setliked(!liked)
+    };
+
+    const setModal = () => {
+        setModalData(id)
+    };
+
     return (
         <ButtonsStyled liked={liked}>
             <button className='likeButton' onClick={onLikeClick}>Like</button>
-            <button onClick={() => { setShowComments(true) }}>
+            <button onClick={setModal}>
                 Comments
             </button>
         </ButtonsStyled>
     )
 }
+)
+
+PostBtns.displayName = "PostBtns"
 
 PostBtns.propTypes = {
     liked: PropTypes.bool,
-    setShowComments: PropTypes.func.isRequired,
+    id: PropTypes.string,
+    setModalData: PropTypes.func.isRequired,
 }
 
 export default PostBtns

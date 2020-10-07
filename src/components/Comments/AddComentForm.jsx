@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import { nanoid } from 'nanoid';
 import { css } from 'emotion';
 
+const styles = css`
+    input {
+        width: 100%;
+        padding: 10px;
+    }
+`
+
 const AddComentForm = ({ id, addComment }) => {
-    const styles = css`
-        input {
-            width: 100%;
-            padding: 10px;
-        }
-    `
 
     const [value, setvalue] = useState('');
 
